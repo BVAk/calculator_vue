@@ -29,13 +29,10 @@
     </div>
   </div>
 </template>
-<script src="math.js" type="text/javascript"></script>
 <script>
-import Button from './Button.vue';
 
 export default {
   name: 'Calculator',
-  components: { Button },
   data() {
     return {
       value: '',
@@ -47,7 +44,6 @@ export default {
     },
     calculate() {
       console.log(this.value);
-      console.log(typeof this.value);
     },
   },
 };
