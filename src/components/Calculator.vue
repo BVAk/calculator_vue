@@ -1,41 +1,55 @@
 <template>
   <div id="calc">
     <div class="calcRow">
-      <span id="field" @add="(i) => count += i"></span>
+      <span id="field">{{ value }}</span>
     </div>
     <div class="calcRow">
-      <Button value="7"></Button>
-      <Button value="8"></Button>
-      <Button value="9"></Button>
-      <Button value="/"></Button>
+      <button @click="calculation('7')">7</button>
+      <button @click="calculation('8')">8</button>
+      <button @click="calculation('9')">9</button>
+      <button @click="calculation('/')">/</button>
     </div>
     <div class="calcRow">
-      <Button value="4"></Button>
-      <Button value="5"></Button>
-      <Button value="6"></Button>
-      <Button value="*"></Button>
+      <button @calculation="calculation('4')">4</button>
+      <button @click="calculation('5')">5</button>
+      <button @click="calculation('6')">6</button>
+      <button @click="calculation('*')">*</button>
     </div>
     <div class="calcRow">
-      <Button value="1"></Button>
-      <Button value="2"></Button>
-      <Button value="3"></Button>
-      <Button value="+"></Button>
+      <button @click="calculation('1')">1</button>
+      <button @click="calculation('2')">2</button>
+      <button @click="calculation('3')">3</button>
+      <button @click="calculation('+')">+</button>
     </div>
     <div class="calcRow">
-      <Button value="0"></Button>
-      <Button value="."></Button>
-      <Button value="="></Button>
-      <Button value="-"></Button>
+      <button @click="calculation('0')">0</button>
+      <button @click="calculation('.')">.</button>
+      <button @click="calculate">=</button>
+      <button @click="calculation('-')">-</button>
     </div>
   </div>
 </template>
-
+<script src="math.js" type="text/javascript"></script>
 <script>
 import Button from './Button.vue';
 
 export default {
   name: 'Calculator',
   components: { Button },
+  data() {
+    return {
+      value: '',
+    };
+  },
+  methods: {
+    calculation(e) {
+      this.value += e;
+    },
+    calculate() {
+      console.log(this.value);
+      console.log(typeof this.value);
+    },
+  },
 };
 </script>
 
@@ -67,5 +81,16 @@ export default {
   height: 40px;
   background-color: white;
   border-radius: 10px;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  width: 70px;
+  margin: 5px;
+  border-radius: 10px;
+  border: 1px solid;
 }
 </style>
