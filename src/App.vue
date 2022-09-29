@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <Calculator />
+    <Calculator v-if="showCalculator" />
+    <Game v-else />
   </div>
 </template>
 

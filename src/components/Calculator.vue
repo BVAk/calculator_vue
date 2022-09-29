@@ -30,7 +30,7 @@
   </div>
 </template>
 <script>
-
+import { evaluate } from 'mathjs';
 export default {
   name: 'Calculator',
   data() {
@@ -43,7 +43,7 @@ export default {
       this.value += e;
     },
     calculate() {
-      console.log(this.value);
+      console.log(evaluate(this.value));
     },
   },
 };
