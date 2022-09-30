@@ -1,19 +1,33 @@
 <template>
   <div id="app">
-    <Calculator v-if="showCalculator" />
-    <Game v-else />
+    <Calculator v-if="showCalculator" @changeForGame="changeForGame" />
+    <Game v-else v-bind:value="value" />
+    <Game :value="10" />
   </div>
 </template>
 
 <script>
 import Calculator from './components/Calculator.vue';
+import Game from './components/Game.vue';
 
 export default {
   name: 'App',
+  data() {
+    return {
+      showCalculator: true,
+      value: 0,
+    };
+  },
   components: {
     Calculator,
+    Game,
   },
-  mounted() {},
+  methods: {
+    changeForGame(e) {
+      this.showCalculator = false;
+      this.value = e;
+    },
+  },
 };
 </script>
 

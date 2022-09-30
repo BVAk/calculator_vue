@@ -2,6 +2,7 @@
   <div id="calc">
     <div class="calcRow">
       <span id="field">{{ value }}</span>
+      <button id="clear" @click="clear">Clear</button>
     </div>
     <div class="calcRow">
       <button @click="calculation('7')">7</button>
@@ -39,11 +40,15 @@ export default {
     };
   },
   methods: {
+    clear() {
+      this.value = '';
+    },
     calculation(e) {
       this.value += e;
     },
     calculate() {
-      console.log(evaluate(this.value));
+      this.value = evaluate(this.value);
+      this.$emit('changeForGame', this.value)
     },
   },
 };
@@ -55,6 +60,7 @@ export default {
   height: auto;
   width: fit-content;
   margin: auto;
+  padding: 5px;
   background-color: #8bc6ec;
   background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
   display: flex;
@@ -72,6 +78,9 @@ export default {
 }
 
 #field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   margin: 5px;
   height: 40px;
@@ -88,5 +97,10 @@ button {
   margin: 5px;
   border-radius: 10px;
   border: 1px solid;
+}
+
+#clear {
+  height: 40px;
+  width: 90px;
 }
 </style>
