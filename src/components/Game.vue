@@ -12,9 +12,9 @@
   </div>
   <span>The answer is calculation</span>
   <div>
-    <span v-for="item in String(value).length" :key="item">_</div>
+    <span class="key" v-for="item in clientValue" :key="item">{{item}}</div>
   </div>
-  <div class="buttons">
+  <div class="buttons" @click="clickNumber">
     <button>0</button>
     <button>1</button>
     <button>2</button>
@@ -31,11 +31,25 @@
 <script>
 export default {
   name: 'Game',
-  data() {
-    return {};
-  },
   props: {
     value: Number,
+  },
+  data() {
+    return {
+      clientValue: String(this.value).replace(/[0-9]|\,/g, '_').split(''),
+      secretValue: String(this.value).split(''),
+    };
+  },
+  methods: {
+    clickNumber(e) {
+      e.target.disabled=true;
+      const element = e.target.innerText;
+      let idx = this.secretValue.indexOf(element);
+      while (idx !== -1) {
+        this.clientValue[idx]=element;
+        idx = this.secretValue.indexOf(element, idx + 1);
+      }
+    },
   },
 };
 </script>
@@ -143,5 +157,9 @@ button {
   right: 43px;
   background-color: black;
   transform: rotate(-32deg);
+}
+
+.key {
+  padding: 5px;
 }
 </style>
