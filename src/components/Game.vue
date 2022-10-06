@@ -3,18 +3,18 @@
     <span id="top_block" />
     <span id="left_block" />
     <span id="right_block" />
-    <span id="head" />
-    <span id="body" />
-    <span id="right_hand" />
-    <span id="left_hand" />
-    <span id="right_leg" />
-    <spn id="left_leg" />
+    <span v-if="tries<=3" id="head" />
+    <span v-if="tries<=2" id="body" />
+    <span v-if="tries<=1" id="right_hand" />
+    <span v-if="tries<=1" id="left_hand" />
+    <span v-if="tries==0" id="right_leg" />
+    <span v-if="tries==0" id="left_leg" />
   </div>
   <span>The answer is calculation</span>
   <div>
     <span class="key" v-for="item in clientValue" :key="item">{{item}}</div>
   </div>
-  <div class="buttons" @click="clickNumber">
+  <div class="buttons" @click="clickNumber" :disable="isDisable">
     <button>0</button>
     <button>1</button>
     <button>2</button>
@@ -27,6 +27,10 @@
     <button>9</button>
     <button>.</button>
   </div>
+  <div v-if="tries==0">
+  <h1>You are lose!</h1> 
+  <span> The right answer is {{value}}</span>
+  </div>
 </template>
 <script>
 export default {
@@ -36,8 +40,10 @@ export default {
   },
   data() {
     return {
-      clientValue: String(this.value).replace(/[0-9]|\,/g, '_').split(''),
+      clientValue: String(this.value).replace(/[0-9]|\./g, '_').split(''),
       secretValue: String(this.value).split(''),
+      tries: 4,
+      isDisable: false,
     };
   },
   methods: {
@@ -45,10 +51,17 @@ export default {
       e.target.disabled=true;
       const element = e.target.innerText;
       let idx = this.secretValue.indexOf(element);
-      while (idx !== -1) {
-        this.clientValue[idx]=element;
-        idx = this.secretValue.indexOf(element, idx + 1);
+      if (idx !== -1) {
+        while (idx !== -1) {
+          this.clientValue[idx]=element;
+          idx = this.secretValue.indexOf(element, idx + 1);
+        }
+      } else {
+        this.tries = this.tries-1;
       }
+      if(this.clientValue.join('')==this.value) {
+        this.$emit('changeForGame', true, this.value)
+      } else if (this.tries==0) this.isDisable=true;
     },
   },
 };
@@ -66,6 +79,8 @@ button {
   position: relative;
   width: 200px;
   height: 200px;
+  margin: auto;
+  padding: 10px;
 }
 
 #left_block {
@@ -79,7 +94,7 @@ button {
 #top_block {
   display: block;
   position: absolute;
-  width: 150px;
+  width: 160px;
   height: 1px;
   background-color: black;
 }
@@ -88,8 +103,8 @@ button {
   display: block;
   position: absolute;
   width: 1px;
-  height: 40px;
-  top: 0;
+  height: 30px;
+  top: 10px;
   right: 50px;
   background-color: black;
 }
@@ -160,6 +175,6 @@ button {
 }
 
 .key {
-  padding: 5px;
+  padding: 5px 10px;
 }
 </style>

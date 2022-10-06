@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-    <Calculator v-if="showCalculator" @changeForGame="changeForGame" />
-    <Game v-else v-bind:value="value" />
-    <Game :value="10" />
+    <Calculator
+      v-if="showCalculator"
+      v-bind:value="value"
+      @changeForGame="changeForGame"
+    />
+    <Game v-else v-bind:value="value" @changeForGame="changeForGame" />
+    <!-- <Game :value="10" /> -->
   </div>
 </template>
 
@@ -23,9 +27,10 @@ export default {
     Game,
   },
   methods: {
-    changeForGame(e) {
-      this.showCalculator = false;
-      this.value = e;
+    changeForGame(status, value) {
+      console.log(value);
+      this.value = value;
+      this.showCalculator = status;
     },
   },
 };

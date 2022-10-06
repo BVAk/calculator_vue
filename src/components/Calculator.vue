@@ -39,6 +39,12 @@ export default {
       value: '',
     };
   },
+  props: {
+    valueComplete: {
+      Type: String,
+      default: '',
+    },
+  },
   methods: {
     clear() {
       this.value = '';
@@ -48,7 +54,7 @@ export default {
     },
     calculate() {
       this.value = evaluate(this.value);
-      this.$emit('changeForGame', this.value)
+      this.$emit('changeForGame', false, this.value);
     },
   },
 };
