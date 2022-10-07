@@ -34,16 +34,17 @@
 import { evaluate } from 'mathjs';
 export default {
   name: 'Calculator',
-  data() {
-    return {
-      value: '',
-    };
-  },
+
   props: {
     valueComplete: {
       Type: String,
       default: '',
     },
+  },
+  data() {
+    return {
+      value: this.valueComplete,
+    };
   },
   methods: {
     clear() {

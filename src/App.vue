@@ -2,7 +2,7 @@
   <div id="app">
     <Calculator
       v-if="showCalculator"
-      v-bind:value="value"
+      v-bind:valueComplete="value"
       @changeForGame="changeForGame"
     />
     <Game v-else v-bind:value="value" @changeForGame="changeForGame" />
