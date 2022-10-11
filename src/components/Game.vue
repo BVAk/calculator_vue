@@ -30,6 +30,7 @@
   <div v-if="tries==0">
   <h1>You are lose!</h1> 
   <span> The right answer is {{value}}</span>
+  <button id="returnButton" @click="returnCalc">Return to calculator</button>
   </div>
 </template>
 <script>
@@ -48,6 +49,7 @@ export default {
   },
   methods: {
     clickNumber(e) {
+      if(this.isDisable) return;
       e.target.disabled=true;
       const element = e.target.innerText;
       let idx = this.secretValue.indexOf(element);
@@ -63,6 +65,9 @@ export default {
         this.$emit('changeForGame', true, this.value)
       } else if (this.tries==0) this.isDisable=true;
     },
+    returnCalc() {
+      this.$emit('changeForGame', true, this.value)
+    }
   },
 };
 </script>
@@ -176,5 +181,14 @@ button {
 
 .key {
   padding: 5px 10px;
+}
+
+#returnButton {
+  margin: 10px auto;
+  padding: 10px;
+  height: auto;
+  width: auto;
+  background-color: #9599e2;
+  color: white;
 }
 </style>

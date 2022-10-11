@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     changeForGame(status, value) {
-      console.log(value);
       this.value = value;
       this.showCalculator = status;
     },
@@ -37,6 +36,13 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: 'digital';
+  font-style: normal;
+  font-weight: normal;
+  src: url('public/font.woff') format('woff');
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

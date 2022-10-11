@@ -11,7 +11,7 @@
       <button @click="calculation('/')">/</button>
     </div>
     <div class="calcRow">
-      <button @calculation="calculation('4')">4</button>
+      <button @click="calculation('4')">4</button>
       <button @click="calculation('5')">5</button>
       <button @click="calculation('6')">6</button>
       <button @click="calculation('*')">*</button>
@@ -55,6 +55,8 @@ export default {
     },
     calculate() {
       this.value = evaluate(this.value);
+      if (String(this.value).includes('.'))
+        this.value = parseFloat(this.value).toFixed(2);
       this.$emit('changeForGame', false, this.value);
     },
   },
@@ -93,6 +95,7 @@ export default {
   height: 40px;
   background-color: white;
   border-radius: 10px;
+  font-family: 'digital';
 }
 
 button {
