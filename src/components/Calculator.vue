@@ -78,7 +78,7 @@ export default {
 
 #calc {
   height: auto;
-  width: fit-content;
+  width: 330px;
   margin: auto;
   padding: 5px;
   background-color: #8bc6ec;
@@ -99,15 +99,19 @@ export default {
 
 #field {
   display: flex;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
+  max-width: 227px;
   width: 100%;
-  margin: 5px;
   height: 40px;
+  overflow: hidden;
+  margin: 5px;
+  padding-right: 5px;
   background-color: white;
   border-radius: 10px;
   font-optical-sizing: auto;
   font-weight: 500;
+  font-size: 25px;
   font-style: normal;
   font-stretch: normal;
   line-height: initial;
