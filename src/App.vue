@@ -40,7 +40,12 @@ export default {
   font-family: 'digital';
   font-style: normal;
   font-weight: normal;
-  src: url('public/font.woff') format('woff');
+  src: url('public/font.eot'); /* IE9 Compat Modes */
+  src: url('public/font.eot?#iefix') format('embedded-opentype'),
+    /* IE6-IE8 */ url('public/font.woff2') format('woff2'),
+    /* Super Modern Browsers */ url('public/font.woff') format('woff'),
+    /* Pretty Modern Browsers */ url('public/font.ttf') format('truetype'),
+    /* Safari, Android, iOS */ url('public/font.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
 
 #app {

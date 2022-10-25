@@ -62,9 +62,20 @@ export default {
   },
 };
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: block;
+  src: url(https://fonts.gstatic.com/s/orbitron/v25/yMJRMIlzdpvBhQQL_Qq7dy1biN15.woff2)
+    format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
 #calc {
   height: auto;
   width: fit-content;
@@ -95,7 +106,12 @@ export default {
   height: 40px;
   background-color: white;
   border-radius: 10px;
-  font-family: 'digital';
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: initial;
+  font-family: 'Orbitron', sans-serif;
 }
 
 button {
