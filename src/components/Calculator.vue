@@ -51,6 +51,11 @@ export default {
       this.value = '';
     },
     calculation(e) {
+      if (String(this.value[0]) === '0') {
+        if (String(this.value[1]) !== '.') {
+          this.value = this.value.slice(1);
+        }
+      }
       this.value += e;
     },
     calculate() {
@@ -83,6 +88,9 @@ export default {
   padding: 5px;
   background-color: #8bc6ec;
   background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+  border: 2px solid black;
+  border-radius: 10px;
+  box-shadow: 0 10px 10px -5px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -116,6 +124,8 @@ export default {
   font-stretch: normal;
   line-height: initial;
   font-family: 'Orbitron', sans-serif;
+
+  box-shadow: inset 0 0 5px;
 }
 
 button {
@@ -126,7 +136,8 @@ button {
   width: 70px;
   margin: 5px;
   border-radius: 10px;
-  border: 1px solid;
+  border: 0px solid;
+  box-shadow: inset 0 0 5px;
 }
 
 #clear {
