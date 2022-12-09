@@ -1,7 +1,7 @@
 <template>
   <div id="calc">
     <div class="calcRow">
-      <span id="field">{{ value }}</span>
+      <span id="field">{{ convertedValue }}</span>
       <button class="button" id="clear" @click="clear">Clear</button>
     </div>
     <div class="calcRow">
@@ -23,8 +23,10 @@
       <button class="funcs" @click="calculation">+</button>
     </div>
     <div class="calcRow">
+      <button class="button" :disabled="disablepoint" @click="calculation">
+        .
+      </button>
       <button class="button" @click="calculation">0</button>
-      <button class="button" @click="calculation">.</button>
       <button class="funcs" @click="calculate">=</button>
       <button class="funcs" @click="calculation">-</button>
     </div>
@@ -43,6 +45,7 @@ export default {
   },
   data() {
     return {
+      disablepoint: false,
       value: this.valueComplete,
     };
   },
@@ -54,24 +57,34 @@ export default {
       const funcSymbol = ['/', '+', '-', '*'];
       const e = event.target.innerHTML;
       if (String(this.value) === '0') {
-        if (e !== '.') {
+        if (e !== ' . ') {
           return (this.value = e);
+        } else this.disablepoint = true;
+      } else if (e === ' . ') {
+        this.disablepoint = true;
+        if (funcSymbol.includes(this.value.slice(-1))) {
+          return (this.value += `0${e}`);
         }
       }
-      if (
-        event.target.classList[0].includes('funcs') &&
-        funcSymbol.includes(this.value.slice(-1))
-      ) {
-        return (this.value =
-          this.value.substring(0, this.value.length - 1) + e);
+      if (event.target.classList[0].includes('funcs')) {
+        this.disablepoint = false;
+        if (funcSymbol.includes(this.value.slice(-1))) {
+          return (this.value =
+            this.value.substring(0, this.value.length - 1) + e);
+        }
       }
       return (this.value += e);
     },
     calculate() {
-      this.value = evaluate(this.value);
+      this.value = evaluate(this.value.replaceAll(' ', ''));
       if (String(this.value).includes('.'))
         this.value = parseFloat(this.value).toFixed(2);
       this.$emit('changeForGame', false, this.value);
+    },
+  },
+  computed: {
+    convertedValue() {
+      return String(this.value).replaceAll(' ', '');
     },
   },
 };
