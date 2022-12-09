@@ -76,7 +76,7 @@ export default {
       return (this.value += e);
     },
     calculate() {
-      this.value = evaluate(this.value.replaceAll(' ', ''));
+      this.value = evaluate(this.convertedValue);
       if (String(this.value).includes('.'))
         this.value = parseFloat(this.value).toFixed(2);
       this.$emit('changeForGame', false, this.value);
