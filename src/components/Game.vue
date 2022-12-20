@@ -49,6 +49,7 @@ export default {
   },
   methods: {
     clickNumber(e) {
+      console.log(e);
       if(this.isDisable) return;
       e.target.disabled=true;
       const element = e.target.innerText;

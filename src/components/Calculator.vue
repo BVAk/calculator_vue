@@ -64,10 +64,11 @@ export default {
           return (this.value = e);
         } else {
           this.disablepoint = true;
-          return (this.value += `0${e}`);
         }
-      } else if (e === ' . ') {
+      } 
+      if (e === ' . ') {
         this.disablepoint = true;
+        if(this.value == "") return (this.value = `0${e}`);
         if (funcSymbol.includes(this.value.slice(-1))) {
           return (this.value += `0${e}`);
         }
