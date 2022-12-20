@@ -47,6 +47,7 @@ export default {
     return {
       disablepoint: false,
       value: this.valueComplete,
+      funcSymbol: ['/', '+', '-', '*'],
     };
   },
   methods: {
@@ -55,7 +56,6 @@ export default {
       this.disablepoint = false;
     },
     calculation(event) {
-      const funcSymbol = ['/', '+', '-', '*'];
       const e = event.target.innerHTML;
       if (String(this.value) === '0' || String(this.value) === '') {
         if (e !== ' . ') {
@@ -65,17 +65,17 @@ export default {
         } else {
           this.disablepoint = true;
         }
-      } 
+      }
       if (e === ' . ') {
         this.disablepoint = true;
-        if(this.value == "") return (this.value = `0${e}`);
-        if (funcSymbol.includes(this.value.slice(-1))) {
+        if (this.value == '') return (this.value = `0${e}`);
+        if (this.funcSymbol.includes(this.value.slice(-1))) {
           return (this.value += `0${e}`);
         }
       }
       if (event.target.classList[0].includes('funcs')) {
         this.disablepoint = false;
-        if (funcSymbol.includes(this.value.slice(-1))) {
+        if (this.funcSymbol.includes(this.value.slice(-1))) {
           return (this.value =
             this.value.substring(0, this.value.length - 1) + e);
         }
@@ -83,6 +83,9 @@ export default {
       return (this.value += e);
     },
     calculate() {
+      if (this.funcSymbol.includes(this.value.slice(-1))) {
+        this.value = this.value.substring(0, this.value.length - 1);
+      }
       this.value = evaluate(this.convertedValue);
       if (this.value != 'Infinity') {
         if (String(this.value).includes('.'))
