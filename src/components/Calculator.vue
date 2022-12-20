@@ -52,15 +52,20 @@ export default {
   methods: {
     clear() {
       this.value = '';
+      this.disablepoint = false;
     },
     calculation(event) {
       const funcSymbol = ['/', '+', '-', '*'];
       const e = event.target.innerHTML;
-      if (String(this.value) === '0') {
+      if (String(this.value) === '0' || String(this.value) === '') {
         if (e !== ' . ') {
-          if (event.target.classList[0].includes('funcs'))  return (this.value = `0${e}`);
+          if (event.target.classList[0].includes('funcs'))
+            return (this.value = `0${e}`);
           return (this.value = e);
-        } else this.disablepoint = true;
+        } else {
+          this.disablepoint = true;
+          return (this.value += `0${e}`);
+        }
       } else if (e === ' . ') {
         this.disablepoint = true;
         if (funcSymbol.includes(this.value.slice(-1))) {
@@ -78,9 +83,11 @@ export default {
     },
     calculate() {
       this.value = evaluate(this.convertedValue);
-      if (String(this.value).includes('.'))
-        this.value = parseFloat(this.value).toFixed(2);
-      this.$emit('changeForGame', false, this.value);
+      if (this.value != 'Infinity') {
+        if (String(this.value).includes('.'))
+          this.value = parseFloat(this.value).toFixed(2);
+        this.$emit('changeForGame', false, this.value);
+      }
     },
   },
   computed: {
