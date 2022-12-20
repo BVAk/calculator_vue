@@ -12,7 +12,7 @@
   </div>
   <span>The answer is calculation</span>
   <div>
-    <span class="key" v-for="item in clientValue" :key="item">{{item}}</div>
+    <span class="key" v-for="item in clientValue">{{item}}</div>
   </div>
   <div class="buttons" @click="clickNumber" :disable="isDisable">
     <button>0</button>
@@ -49,7 +49,6 @@ export default {
   },
   methods: {
     clickNumber(e) {
-      console.log(e);
       if(this.isDisable) return;
       e.target.disabled=true;
       const element = e.target.innerText;
