@@ -58,6 +58,7 @@ export default {
       const e = event.target.innerHTML;
       if (String(this.value) === '0') {
         if (e !== ' . ') {
+          if (event.target.classList[0].includes('funcs'))  return (this.value = `0${e}`);
           return (this.value = e);
         } else this.disablepoint = true;
       } else if (e === ' . ') {
